@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Backend Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #5c4033; /* Rich brown */
+            background: linear-gradient(135deg, #f5e1da 0%, #d8b4a0 100%);
+            min-height: 100vh;
+        }
+    
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    
+        .header {
+            text-align: center;
+            color: #4e342e;
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #b9745b, #d9a074);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+    
+        @keyframes glow {
+            from { text-shadow: 0 0 15px rgba(185, 116, 91, 0.4); }
+            to { text-shadow: 0 0 25px rgba(217, 160, 116, 0.6); }
+        }
+    
+        .header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+    
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+    
+        .social-links a {
+            color: #4e342e;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+    
+        .section:hover {
+            transform: translateY(-5px);
+        }
+    
+        .section h2 {
+            color: #5c4033;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+    
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #b9745b, #d9a074);
+            border-radius: 2px;
+        }
+    
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+    
+        .skill-category {
+            background: linear-gradient(135deg, #f9f4f0 0%, #e8d5c4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+    
+        .skill-category h3 {
+            color: #4e342e;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+    
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    
+        .skill-tag {
+            background: linear-gradient(45deg, #d7a07e, #caa480);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+    
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+    
+        .project-card {
+            background: linear-gradient(135deg, #c6a189, #d9b8a3);
+            color: #4e342e;
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+    
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+    
+        .project-card:hover::before {
+            opacity: 1;
+        }
+    
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+    
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+    
+        .project-card p {
+            margin-bottom: 20px;
+            opacity: 0.85;
+        }
+    
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+    
+        .tech-item {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+    
+        .project-links a {
+            color: #4e342e;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    
+        .project-links a:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.05);
+        }
+    
+        .experience-item {
+            border-left: 4px solid #c8a97e;
+            padding-left: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+    
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #c8a97e;
+            border-radius: 50%;
+        }
+    
+        .experience-item h3 {
+            color: #4e342e;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+    
+        .experience-item .duration {
+            color: #7e6651;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+    
+        .contact-form {
+            display: grid;
+            gap: 20px;
+        }
+    
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #4e342e;
+        }
+    
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e0cfc1;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+    
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c8a97e;
+        }
+    
+        .submit-btn {
+            background: linear-gradient(45deg, #b9745b, #d9a074);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #4e342e;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+    
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+    
+            .header h1 {
+                font-size: 2.5rem;
+            }
+    
+            .section {
+                padding: 25px;
+            }
+    
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>    
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>OLUWAYEMISI OJO</h1>
+            <p>Backend Engineer | 3+ Years Experience</p>
+            <p>Specializing in Node.js, Express.js, TypeScript & Database Solutions</p>
+            <div class="social-links">
+                <a href="https://github.com/Oluwayemissy" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/oluwayemisi-ojo-64b0171a5/" target="_blank">LinkedIn</a>
+                <a href="mailto:holuwayemissy36@gmail.com">Email</a>
+                <a href="assets/OLUWAYEMISI OJO (CV).pdf" target="_blank">Resume</a>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section class="section">
+            <h2>About Me</h2>
+            <p>Passionate backend engineer with 3+ years of experience building scalable web applications and APIs. I specialize in Node.js ecosystem with expertise in Express.js, TypeScript, and both SQL and NoSQL databases. I love solving complex problems and building robust, maintainable systems that power modern applications.</p>
+            <p>Currently focused on microservices architecture, API design, and cloud-native solutions. Always eager to learn new technologies and contribute to innovative projects.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">REST APIs</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Database Design</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VSCode</span>
+                        <span class="skill-tag">Postman</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Github</span>
+                        <span class="skill-tag">Mocha</span>
+                        <span class="skill-tag">Cloudinary</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Beacon Health HQ</h3>
+                    <p>A centralized medical lab HQ portal designed to oversee and coordinate operations across multiple laboratory branches. The platform enables administrators to manage lab centers, monitor performance metrics, track patient visits, oversee test processing, and generate reports for decision-making. It supports role-based access control, real-time data syncing from various centers, and efficient resource allocation. I worked on the backend of the portal, implementing key features such as multi-center management, data aggregation, analytics support, and secure system integrations to ensure reliable and scalable lab operations at the HQ level.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://admin.olewerk.com" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Beacon Health Website</h3>
+                    <p>A medical laboratory web application that enables users to search for diagnostic tests and book appointments online. The platform offers detailed information on available tests to support informed decision-making and streamlines the booking process by allowing patients to select preferred dates and times. I developed the backend to support core features such as test search, appointment scheduling, and secure data handling, ensuring a reliable and efficient user experience.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://www.beaconhealth.io" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Beacon Health Center</h3>
+                    <p>A medical lab center portal designed to help staff efficiently manage patient visits and lab-related workflows. The platform allows users to create and manage patient records, book lab visits, assign diagnostic tests, and track the progress of each visit from start to finish. It also supports features like real-time status updates, test result uploads, and secure patient data management. I developed the backend systems that power these core functionalities, ensuring smooth visit creation, appointment scheduling, and integration with laboratory processes to support accurate and timely diagnostics.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://center.olewerk.com" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Eight Medical</h3>
+                    <p>Eight Medical is a healthcare service provider that offers ambulance standby for events and emergencies, ensuring rapid response with trained medical personnel and fully equipped ambulances. The portal allows clients to request and manage ambulance services, track deployments, and access service history. I developed the backend of the portal, implementing key features such as service request handling, scheduling, and secure data management to support efficient coordination and reliable emergency response operations.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Peach Blog</h3>
+                    <p>Peach Blog is a dynamic content publishing platform that enables users to write and share blog posts, interact through likes, comments, and reposts, and discover content via features like recent posts, top-viewed articles, and the latest updates. Designed to encourage engagement and easy content exploration, the portal provides a seamless blogging experience for both writers and readers. I developed the backend systems that power core functionalities such as post creation, user interactions, content ranking, and real-time data retrieval, ensuring reliable performance and scalability.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Oluwayemissy/Peach-blog" target="_blank">GitHub</a>
+                        <a href="https://peach-blog.onrender.com" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Beam</h3>
+                    <p>A medical partner's portal designed to help partner organizations manage their interactions with the medical center efficiently. The platform allows partners to register, refer patients, track referral statuses, view test results, and manage billing or service records. It provides a centralized dashboard for monitoring patient activity, communication, and reporting. I worked on the backend of the portal, implementing key features such as partner onboarding, referral management, data access controls, and secure integration with internal medical systems to ensure smooth collaboration and data accuracy across stakeholders.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://beam.olewerk.com" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Sentinelx</h3>
+                    <p>A medical patient portal that empowers patients to take control of their healthcare by providing secure access to personal health information, test results, and visit history. The platform allows users to manage their profiles and receive updates on their test progress. I developed the backend of the portal, building features for user authentication, test result retrieval, and secure data management to ensure a seamless, reliable, and patient-friendly experience.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://www.sentinelx.io" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Hazel AI</h3>
+                    <p>An AI-assisted healthcare management backend system designed to streamline clinical workflows for healthcare administrators and medical staff such as doctors and nurses. It centralizes patient data, supports guided clinical documentation, and leverages Google Gemini AI to generate intelligent and structured medical records.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                        <span class="tech-item">Google Gemini AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://www.gohazel.ai/" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Hazel AI Admin</h3>
+                    <p>A centralized management platform designed to oversee the Hazel AI healthcare ecosystem across multiple clinics and organizations. It provides system-wide administrative controls for managing healthcare centers, users, roles, permissions, and platform configurations. The platform enables administrators to monitor system activity, manage integrations, and enforce secure access while maintaining operational consistency across the entire healthcare network.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                        <span class="tech-item">Mocha</span>
+                        <span class="tech-item">Google Gemini AI</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://admin.gohazel.ai" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>Affiliate center</h3>
+                    <p>A Medical Affiliate Portal that enables outreach partners and external clinics to refer patients, schedule lab visits, and track diagnostic tests. The platform integrates with the core medical laboratory system to support patient referrals, real-time visit status updates, and secure sharing of medical test results between partner centers and the main lab.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express.js</span>
+                        <span class="tech-item">PostgreSQL</span>
+                        <span class="tech-item">JWT</span>
+                        <span class="tech-item">Mocha</span>
+                    </div>
+                    <div class="project-links">
+                        <a href=" " target="_blank">GitHub</a>
+                        <a href="https://outreach.olewerk.com" target="_blank">Live Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section">
+            <h2>Professional Experience</h2>
+            <div class="experience-item">
+                <h3>Backend Developer - Enyata</h3>
+                <div class="duration">Nov 2022 - Present</div>
+                <li>Collaborated with cross-functional teams, including frontend developers, designers, and product managers, on projects such as Eight Medical (an emergency response app) and MDAAS (an administrative app for a medical diagnostic company) to understand project requirements and contributed to solutions.</li>
+                <li>Contributed to the development of new features, enhancements, and bug fixes.</li>
+                <li>Learned to debug and solve problems efficiently under the guidance of senior engineers.</li>
+                <li>Learned from feedback provided during code reviews to improve coding practices.</li>
+                <li>Build and maintain robust APIs (Application Programming Interfaces) that allow communication between the backend and frontend systems.</li>
+                <li>Actively contributed to the success of the team by learning, collaborating, and delivering high-quality software solutions while growing professionally in the field of technology.</li>
+                <li>Actively engage in learning and professional development to enhance technical skills.</li>
+                <li>Implemented i18n support for French and English in a Node.js backend application to enable seamless language switching and localization.</li>
+                <li>Managed dynamic translation files and optimized backend processes for multilingual support.</li>
+                <li>Developed and maintained backend services for Hazel AI, an AI-assisted healthcare management system that streamlines clinical workflows and patient care operations.</li>
+                <li>Integrated Google Gemini AI to enable intelligent medical document generation and assist clinicians with automated documentation.</li>
+            </div>
+            <div class="experience-item">
+                <h3>Software Developer Intern - Enyata Academy</h3>
+                <div class="duration">June 2022 - Nov 2022</div>
+                <p>Trained in full-stack development with hands-on experience in backend and frontend technologies. Gained practical knowledge in UI/UX design and product ownership, contributing to user-focused solutions and learning how to manage and prioritize product backlogs. Collaborated with a cross-functional team to build a functional application, applying Agile principles in a real-world setting. The internship also emphasized leadership development, teaching us how to take initiative, communicate effectively, and guide teams toward shared goals.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section">
+            <h2>Get In Touch</h2>
+            <p>I'm always interested in new opportunities and collaborations. Feel free to reach out if you'd like to discuss a project or just want to connect!</p>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+            <!-- <p id="formSuccess" style="display:none; color: green; margin-top: 1rem;">
+                Thank you for your message! I\'ll get back to you soon
+            </p> -->
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Oluwayemisi Ojo. Built with passion for backend engineering.</p>
+            <p>Open to opportunities | Passionate about building scalable backend systems</p>
+        </footer>
+    </div>
+
+    <script>
+        // ✅ Form submission with Formspree + success message
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('formSuccess');
+
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+            const response = await fetch('https://formspree.io/f/mqabyvlo', {
+                method: 'POST',
+                headers: {
+                Accept: 'application/json'
+                },
+                body: formData
+            });
+
+            if (response.ok) {
+                form.reset();
+                alert("✅ Thank you for your message! I'll get back to you soon.");
+            } else {
+                alert('Something went wrong. Please try again.');
+            }
+            } catch (error) {
+            console.error(error);
+            alert('Failed to send message. Please check your connection.');
+            }
+        });
+
+        // Add smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
